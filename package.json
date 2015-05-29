@@ -1,0 +1,28 @@
+{
+  "name": "testx-postgres-keywords",
+  "version": "0.1.0",
+  "description": "Keywords to test postgres db",
+  "main": "index.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "jasmine-custom-message": "^0.7.3",
+    "pg": "^4.3.0",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://www.gitlab.isd.ictu/test/testx-postgres-keywords.git"
+  },
+  "keywords": [
+    "testx",
+    "keywords",
+    "postgres",
+    "db"
+  ],
+  "author": "Giovanni Renfurm",
+  "license": "ISC"
+}
