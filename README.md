@@ -6,12 +6,7 @@ A library that extends testx with keywords for testing postgres databases. This 
 ## How does it work
 From the directory of the art code install the package as follows:
 ```sh
-npm install testx-soap-keywords --save --registry=http://npm.isd.ictu
-```
-
-You can also add the following dependency to your package.json file:
-```json
-"testx-soap-keywords": "http://npm.isd.ictu/testx-soap-keywords/-/testx-postgres-keywords-0.1.0.tgz"
+npm install testx-soap-keywords --save
 ```
 
 After installing the package you add these keywords to testx by adding the following line to your protractor config file:
