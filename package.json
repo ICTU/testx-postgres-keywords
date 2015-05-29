@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://www.gitlab.isd.ictu/test/testx-postgres-keywords.git"
+    "url": "git+ssh://git@github.com/gioren/testx-postgres-keywords.git"
   },
   "keywords": [
     "testx",
@@ -24,5 +24,9 @@
     "db"
   ],
   "author": "Giovanni Renfurm",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gioren/testx-postgres-keywords/issues"
+  },
+  "homepage": "https://github.com/gioren/testx-postgres-keywords#readme"
 }
