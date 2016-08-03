@@ -1,12 +1,11 @@
 pg        = require 'pg'        # Library for connection to postgres database
 q         = require 'q'
 
-# Retrieve records from database
-exports.retrieveRecords = (connectionString, sql) ->
+exports.executeQuery = (connectionString, sql) ->
   deferred = q.defer()
 
   # Create client and connect
-  client = new (pg.Client)(connectionString)
+  client = new pg.Client(connectionString)
   client.connect (err) ->
     if err
       deferred.reject "Could not connect to database because:\n#{err}"
@@ -30,30 +29,7 @@ exports.retrieveRecords = (connectionString, sql) ->
       csvRecords = csvRecords + newLine
     client.end()
     deferred.resolve csvRecords
-
   query.on 'error', (err) ->
-    deferred.reject "Could not retrieve records because:\n#{err}"
-
-  deferred.promise
-
-exports.executeQuery = (connectionString, sql) ->
-  deferred = q.defer()
-
-  # Create client and connect
-  client = new (pg.Client)(connectionString)
-  client.connect (err) ->
-    if err
-      deferred.reject "Could not connect to database because:\n#{err}"
-
-  console.log 'Executing query: ' + sql
-  query = client.query sql
-
-  query.on 'end', (result) ->
-    client.end()
-    deferred.resolve 'Query executed successfully'
-
-  query.on 'error', (err) ->
-    client.end()
     deferred.reject "Could not execute query because:\n#{err}"
 
   deferred.promise

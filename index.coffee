@@ -1,18 +1,18 @@
 dbclient  = require './postgres'
+parseConn = require('pg-connection-string').parse
 
 module.exports =
-  'check records in db': (args) ->
-    dbPromise = dbclient.retrieveRecords(args["database url"], args.query)
-    dbPromise.then (result) ->
-      since("Expected the following records:\n#{args.expected} \nbut found:\n#{result}")
-      .expect(result).toBe(args.expected)
-    .catch (error) ->
-      since(error)
-      .expect(error).toBeUndefined()
-  'execute sql query': (args) ->
-    dbPromise = dbclient.executeQuery(args["database url"], args.query)
-    dbPromise.then (result) ->
-      console.log 'Successfully executed query'
-    .catch (error) ->
-      since(error)
-      .expect(error).toBeUndefined()
+  'execute sql': (args, context) ->
+    if args.sql
+      connectionString = parseConn(args['connection string'] or browser.params.postgresConnectionString)
+      dbPromise = dbclient.executeQuery connectionString, args.sql
+      dbPromise.then (result) ->
+        if expected = args['expected result']
+          expect(result).toBe expected, """Expected the following records:
+            #{expected}
+            but found:
+            #{result}"""
+        if save = args['save result to']
+          context[save] = result
+    else
+      throw new Error 'Cannot use the "execute sql" keyword without providing "sql" parameter.'
