@@ -12,7 +12,7 @@ npm install testx-postgres-keywords --save
 After installing the package you add these keywords to testx by adding the following line to your protractor config file:
 
 ```coffee
-testx.addKeywords(require 'testx-postgres-keywords')
+testx.keywords.add(require 'testx-postgres-keywords')
 ```
 
 ## Keywords
