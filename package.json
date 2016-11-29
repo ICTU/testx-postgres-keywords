@@ -1,6 +1,6 @@
 {
   "name": "testx-postgres-keywords",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Keywords to test postgres db with testx.io",
   "main": "index.coffee",
   "dependencies": {
@@ -8,13 +8,18 @@
     "pg-connection-string": "^0.1.3",
     "q": "^1.4.1"
   },
+  "peerDependencies": {
+    "testx": "^2.3.1"
+  },
   "devDependencies": {
     "coffee-script": "^1.10.0",
-    "testx": "^1.11.0"
+    "testx": "^2.3.1"
   },
   "scripts": {
-    "test": "protractor test/conf.coffee",
-    "test-docker": "docker run --rm -it -v `pwd`:/work --net=host testx/protractor test/conf.coffee"
+    "test-local": "protractor test/conf.coffee",
+    "pretest": "docker run -d --name postgres-testx postgres:9-alpine; sleep 5",
+    "test": " docker run --rm -it -v `pwd`:/work --link postgres-testx testx/protractor test/conf.coffee",
+    "posttest": "docker kill postgres-testx && docker rm -v postgres-testx"
   },
   "repository": {
     "type": "git",

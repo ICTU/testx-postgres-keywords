@@ -1,5 +1,5 @@
-pg        = require 'pg'        # Library for connection to postgres database
-q         = require 'q'
+pg = require 'pg'
+q  = require 'q'
 
 exports.executeQuery = (connectionString, sql) ->
   deferred = q.defer()
@@ -8,7 +8,8 @@ exports.executeQuery = (connectionString, sql) ->
   client = new pg.Client(connectionString)
   client.connect (err) ->
     if err
-      deferred.reject "Could not connect to database because:\n#{err}"
+      console.error "Could not connect to the database because:\n#{err}"
+      deferred.reject "Could not connect to the database because:\n#{err}"
 
   # Execute query
   query = client.query sql
@@ -16,19 +17,11 @@ exports.executeQuery = (connectionString, sql) ->
     result.addRow row
 
   query.on 'end', (result) ->
-    fieldCount = result.fields.length
-    rowCount = result.rows.length
-    csvRecords = ''
-    for row, rowIndex in result.rows
-      fieldIndex = 0
-      for field of row
-        fieldIndex++
-        delimiter = if fieldIndex < fieldCount then ';' else ''
-        csvRecords = csvRecords + row[field] + delimiter
-      newLine = if (rowIndex + 1) < rowCount then '\n' else ''
-      csvRecords = csvRecords + newLine
-    client.end()
+    rows = result.rows.map (row) ->
+      (v for k, v of row).join ';'
+    csvRecords = rows.join '\n'
     deferred.resolve csvRecords
+    client.end()
   query.on 'error', (err) ->
     deferred.reject "Could not execute query because:\n#{err}"
 

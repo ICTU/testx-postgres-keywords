@@ -1,5 +1,3 @@
-testx = require 'testx'
-
 exports.config =
   directConnect: true
   specs: ['spec*']
@@ -19,11 +17,12 @@ exports.config =
   rootElement: 'html'
 
   params:
-    postgresConnectionString: 'postgres://postgres:secret@localhost:5432/postgres'
+    postgresConnectionString: 'postgres://postgres:secret@postgres-testx:5432/postgres'
     testx:
       logScript: false
       actionTimeout: 4000
 
   onPrepare: ->
+    require 'testx'
     testx.keywords.add require('../')
     beforeEach -> browser.ignoreSynchronization = true
