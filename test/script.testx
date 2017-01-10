@@ -1,6 +1,6 @@
 - execute sql:
     sql: SELECT 1;
-    expected result: 1
+    expected result: '1'
     save result to: saved
 - execute sql:
     sql: SELECT 1;
