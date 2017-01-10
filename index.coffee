@@ -1,5 +1,12 @@
 dbclient  = require './postgres'
 parseConn = require('pg-connection-string').parse
+_ = require 'lodash'
+
+printable = (obj, delimiter = ', ') ->
+    ("#{k}: #{v}" for k, v of obj).join delimiter
+
+assertFailedMsg = (msg, ctx) ->
+  "#{msg} in #{printable _.pick(ctx._meta, 'file', 'sheet', 'Row')}"
 
 module.exports =
   'execute sql': (args, context) ->
@@ -10,10 +17,8 @@ module.exports =
         dbPromise = dbclient.executeQuery connectionString, args.sql
         dbPromise.then (result) ->
           if expected = args['expected result']
-            expect(result).toBe expected, """Expected the following records:
-              #{expected}
-              but found:
-              #{result}"""
+            failMsg = assertFailedMsg "Expected the following records: #{expected} but found: #{result}", context
+            expect(result).toBe expected, failMsg
           if save = args['save result to']
             context[save] = result
     else
