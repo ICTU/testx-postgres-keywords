@@ -21,5 +21,8 @@ module.exports =
             expect(result).toBe expected, failMsg
           if save = args['save result to']
             context[save] = result
+        .catch (err) ->
+          failMsg = assertFailedMsg err, context
+          throw new Error failMsg
     else
       throw new Error 'Cannot use the "execute sql" keyword without providing "sql" parameter.'
