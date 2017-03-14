@@ -21,4 +21,5 @@ exports.executeQuery = (connectionString, sql) ->
       client.end()
       resolve csvRecords
     query.on 'error', (err) ->
+      client.end()
       reject "Could not execute query because:\n#{err}"

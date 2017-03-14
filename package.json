@@ -1,6 +1,6 @@
 {
   "name": "testx-postgres-keywords",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Keywords to test postgres db with testx.io",
   "main": "index.coffee",
   "dependencies": {
