@@ -1,4 +1,4 @@
-testx-postgres-keywords
+@testx/keywords-postgres
 =====
 
 A library that extends testx with keywords for testing [Postgres](https://www.postgresql.org/) databases.
@@ -6,7 +6,7 @@ A library that extends testx with keywords for testing [Postgres](https://www.po
 ## How does it work
 From the directory of the art code install the package as follows:
 ```sh
-npm install testx-postgres-keywords --save
+npm install @testx/keywords-postgres --save
 ```
 
 After installing the package you add these keywords to testx by adding the following line to your protractor config file:
