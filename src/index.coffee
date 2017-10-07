@@ -18,7 +18,7 @@ module.exports =
         dbPromise.then (result) ->
           if expected = args['expected result']
             failMsg = assertFailedMsg "Expected the following records: #{expected} but found: #{result}", context
-            expect(result).toBe expected, failMsg
+            expect(result).toEqual expected, failMsg
           if save = args['save result to']
             context[save] = result
         .catch (err) ->

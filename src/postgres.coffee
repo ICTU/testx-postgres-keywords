@@ -16,10 +16,11 @@ exports.executeQuery = (connectionString, sql) ->
 
     query.on 'end', (result) ->
       rows = result.rows.map (row) ->
-        (v for k, v of row).join ';'
-      csvRecords = rows.join '\n'
+        fields = {}
+        fields[k] = v for k, v of row
+        fields
       client.end()
-      resolve csvRecords
+      resolve rows
     query.on 'error', (err) ->
       client.end()
       reject "Could not execute query because:\n#{err}"

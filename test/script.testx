@@ -1,6 +1,7 @@
 - execute sql:
     sql: SELECT 1;
-    expected result: '1'
+    expected result:
+      - ?column?: 1
     save result to: saved
 - execute sql:
     sql: SELECT 1;
@@ -8,11 +9,11 @@
 - execute sql:
     sql: DROP TABLE IF EXISTS test; CREATE TABLE test (first varchar(20), second integer);
 - execute sql:
-    sql: INSERT INTO test(first, second) VALUES('test1', 12);
-- execute sql:
-    sql: INSERT INTO test(first, second) VALUES('test2', 34);
+    sql: INSERT INTO test(first, second) VALUES ('test1', 12), ('test2', 34);
 - execute sql:
     sql: SELECT * FROM test;
-    expected result: |-
-      test1;12
-      test2;34
+    expected result:
+      - first: test1
+        second: 12
+      - first: test2
+        second: 34
