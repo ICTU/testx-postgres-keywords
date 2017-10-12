@@ -1,6 +1,6 @@
 {
   "name": "@testx/keywords-postgres",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Keywords to test postgres db with testx.io",
   "main": "lib/index.js",
   "dependencies": {

@@ -18,11 +18,19 @@ testx.keywords.add(require('@testx/keywords-postgres'))
 ## Example **testx** script:
 ```
 - execute sql:
-    sql: DROP TABLE IF EXISTS test; CREATE TABLE test (first varchar(20), second integer);
+    sql: SELECT 1;
+    expected result:
+      - ?column?: 1
+    save result to: saved
 - execute sql:
-    sql: INSERT INTO test(first, second) VALUES ('test1', 12), ('test2', 34);
+    sql: SELECT 1;
+    expected result: '{{saved}}'
 - execute sql:
-    sql: SELECT * FROM test;
+    sql: |-
+      DROP TABLE IF EXISTS test;
+      CREATE TABLE test (first varchar(20), second integer);
+      INSERT INTO test(first, second) VALUES ('test1', 12), ('test2', 34);
+      SELECT * FROM test;
     expected result:
       - first: test1
         second: 12
