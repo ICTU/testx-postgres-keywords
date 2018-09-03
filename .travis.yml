@@ -1,0 +1,18 @@
+sudo: required
+addons:
+  chrome: stable
+language: node_js
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database postgres_testx;' -U postgres
+node_js:
+  - "8"
+before_deploy: coffee  -o lib/ -c src/
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: ivan.milenkovic@ictu.nl
+  api_key: $NPM_TOKEN
+  on:
+    tags: true

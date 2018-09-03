@@ -1,18 +1,20 @@
-@testx/keywords-postgres
+[![Build Status](https://travis-ci.org/ICTU/testx-postgres-keywords.svg?branch=master)](https://travis-ci.org/ICTU/testx-postgres-keywords)
+
+@ictu/testx-keywords-postgres
 =====
 
-A library that extends testx with keywords for testing [Postgres](https://www.postgresql.org/) databases.
+A library that extends testx with keywords for testing [Postgres](https://www.postgresql.org/) databases. @ictu/testx-keywords-postgres is a fork of @testx/keywords-postgres, maintained and used by ICTU (www.ictu.nl). This library is packaged as a npm package.
 
 ## How does it work
 From the directory of the art code install the package as follows:
 ```sh
-npm install @testx/keywords-postgres --save
+npm install @ictu/testx-keywords-postgres --save
 ```
 
 After installing the package you add these keywords to testx by adding the following line to your protractor config file:
 
 ```
-testx.keywords.add(require('@testx/keywords-postgres'))
+testx.keywords.add(require('@ictu/testx-keywords-postgres'))
 ```
 
 ## Example **testx** script:
